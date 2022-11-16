@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>C++ Multiple Inheritance</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/clean-blog.min.css" rel="stylesheet">
+
+	<!-- Google add sense -->
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-1464650719694487",
+		enable_page_level_ads: true
+	  });
+	</script>
+	
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Stone Blog</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+          <!--  <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+			-->
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('img/post-bg.jpg')">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-heading">
+              <h1>Multiple Inheritance : Concept and Implementation in C++</h1>
+              <h2 class="subheading">And yes we do have solution for DIAMOND PROBLEM.</h2>
+              <span class="meta">Posted by
+                <a href="#">Stone</a>
+                on September 29, 2017</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+      <div class="container">
+	  <hr>
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <p>INHERITANCE is the concept to reuse the older functionality for newer class. All the implemented properties are inherited in the newer class. So at board level it prevent us from reinventing the whole wheel again. C++ supports all types of inheritance, which includes:
+				<ul class="">
+				  <li class="">Simple inheritance</li>
+				  <li class="">Multi-level inheritance</li>
+				  <li class="">Multiple inheritance</li>
+				  <li class="">Hybrid inheritance</li>
+				</ul>
+			</p>
+			
+            <p>In this article our main focus will be <b>Multiple-Inheritance</b>.Multiple inheritance is a inheritance in which we can have <code>N</code> base classes and a single derived class inheriting from more than one BASE CLASS</p>
+			
+			<img src="img/multipleInheritance.png" alt="Multiple-Inheritance Picture"> </img>
+			<h6><b>Fig 1.</b> Multiple-Inheritance Block Diagram</h6>
+			<!-- Block diagram : Multiple-Inheritance -->
+
+            
+			<p>Many of OOPS languages don't supports MULTIPLE INHERITANCE directly , as it has its own issues which we will discuss in later shortly.</p>
+
+            <p>Let us take <u>a real world example</u> of multiple inheritance, which will make it more clear for us.</p>
+
+            <p>Today most of us uses smart phones, which has many functionality but for our examples lets consider we need a smart phone with two basic functionality Phone(Calling and SMS) and Camera (Take pictures). Both are separate entities and have their own separate implementation of their functionalities. A SmartPhone developer instead of developing from zero, will use the these already existing implementation of the functionalities. Below is the diagram representing : </p>
+			<img src="img/phone_camera.png" alt="Example Class"></img>		
+			<h6><b>Fig 2.</b> Class Diagram from above example</h6>			
+		
+			<code><h4>Basic code syntax of multiple inheritance </h4>
+				class Phone { } ;<br>
+				class Camera { } ;<br>
+				class SmartPhone : public Phone , public Camera ;<br>
+			</code>
+			<!-- code snippet here	-->
+            
+			<code><h4>Memory structure , how multiple inheritance is plotted in memory :</h4>
+					+-----------+ <br>
+					|...Phone...+ <br>
+					+-----------+ <br>
+					|...Camera..+ <br>
+					+-----------+ <br>
+					|Smart_Phone+ <br>
+					+-----------+
+			</code>
+            <hr>
+			<h2 class="section-heading">Issues with multiple inheritance : </h2>
+			<ul class="">
+				<li class=""><h3>Ambiguity</h3>
+					<p>It is compile time error in C++, which says that in the MULTIPLE-INHERITANCE design, either of base classes have same function and calling from derived class confuses complier which one to call.</p>
+
+					<p>Continuing with the smart-phone example , lets say we have <code>sleep</code> functionality in both Classes(Phone and Camera), and we have a smartPhone. From smartPhone we called <code>sleep</code> functionality. Here whats the problem arises ,which functionality is to be called (Phones or Camera). Hence we have ambiguous condition here.</p>
+					<p>It will be more clear with an example</p>
+					
+					<!-- 	-->
+					<img src="img/sleep_func.png"></img>
+					<h6><b>Fig 3.</b>Ambiguity problem.</h6>
+					
+					<p>As smartPhone has 2 definition of sleep, it will be not able to differentiate among them and compilation error of "	ambiguous member " is shown</p>
+				</li>
+				<li class=""><h3>DIAMOND PROBLEM</h3>
+					<img src="img/diamond.png"></img>
+					<h6><b>Fig 3.</b>Diamond Problem</h6>
+					<p>From the above diagram , we can see that the <code>DerivedClass2</code> has two copies of <code>Base</code>, which in memory looks like : 
+					<img src="img/diamond1.png"></img>
+					<h6><b>Fig 3.</b>Memory plot of diamond problem.</h6>
+					
+					This is the diamond problem.</p>
+				</li>
+			</ul>
+			<hr>
+            <blockquote class="blockquote">None feature in any programming language is neither too good that we can use it at every problem nor too bad that it has no use case of it. Every feature has it well defined range. we cannot avoid multiple-inheritance completely, it is a powerful tool for its range. Yes, when multiple inheritance is being used, be aware of the pit fall like diamond problem and ambiguity.</blockquote>
+
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+           <!-- <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul> -->
+            <p class="copyright text-muted">Copyright &copy; Navin Maheshwari 2017</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/clean-blog.min.js"></script>
+
+  </body>
+
+</html>
